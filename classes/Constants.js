@@ -1,8 +1,8 @@
 var CONSTANTS = {
     CARD: {
         SIZES: {
-            WIDTH: 80,
-            HEIGHT: 120,
+            WIDTH: 60,
+            HEIGHT: 80,
         },
         TYPES: {
             UNITY: "unity",
