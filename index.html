@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Teste</title>
+    <style>
+        .row{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+
+        div.game{
+            border: 1px solid;
+            width: 70%;
+            height: 600px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        div.card-showcase{
+            width: 25%;
+            height: 400px;
+            margin-left: 10px;
+        }
+
+        .player2, 
+        .player1{
+            display: flex;
+            flex-direction: column;
+            height: 300px;
+        }
+
+        .player1{
+            justify-content: end;
+        }
+
+        .hand{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            border: 1px solid;
+            padding: 10px;
+            margin: 10px;
+            width: 60%;
+            align-self: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div v-if="game">
+            <div class="row">
+                <div class="game">
+                    <div class="player2">
+                        <div class="hand">
+                            <img v-for="card in game.player2.hand" :src="GLOBALS.ASSETS[card.asset].src" :width="CONSTANTS.CARD.SIZES.WIDTH" :height="CONSTANTS.CARD.SIZES.HEIGHT" @mouseover="SetShowcaseImage(GLOBALS.ASSETS[card.asset].src)">
+                        </div>
+                    </div>
+                    <div class="player1">
+                        <div class="hand">
+                            <img v-for="card in game.player1.hand" :src="GLOBALS.ASSETS[card.asset].src" :width="CONSTANTS.CARD.SIZES.WIDTH" :height="CONSTANTS.CARD.SIZES.HEIGHT" @mouseover="SetShowcaseImage(GLOBALS.ASSETS[card.asset].src)">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-showcase">
+                    <img v-if="showcaseImage" :src="showcaseImage" width="100%" height="100%">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+<script type="module">
+    import Game from './engine/Game.js'
+    import Card from './classes/Card.js'
+    import Deck from './classes/Deck.js'
+    import Player from './classes/Player.js'
+    import CONSTANTS, { GLOBALS } from './classes/Constants.js';
+
+    const app = new Vue({
+        el: "#app",
+        data: {
+            game: null,
+            CONSTANTS: CONSTANTS,
+            GLOBALS: GLOBALS,
+
+            showcaseImage: null,
+        },
+        mounted: function(){
+            this.StartGame();
+        },
+        methods: {
+            StartGame: function(){
+                this.SetupGame();
+                this.game.Start();
+            },
+            SetupGame: function(){
+                var cardsPlayer1 = [
+                    new Card("Hoopa", CONSTANTS.CARD.TYPES.UNITY, "HOOPA"),
+                    new Card("Hoopa1", CONSTANTS.CARD.TYPES.UNITY, "HOOPA"),
+                    new Card("Inteleon", CONSTANTS.CARD.TYPES.UNITY, "INTELEON"),
+                    new Card("Inteleon1", CONSTANTS.CARD.TYPES.UNITY, "INTELEON"),
+                    new Card("Moltres", CONSTANTS.CARD.TYPES.UNITY, "MOLTRES"),
+                    new Card("Moltres1", CONSTANTS.CARD.TYPES.UNITY, "MOLTRES"),
+                    new Card("Urshifu", CONSTANTS.CARD.TYPES.UNITY, "URSHIFU"),
+                    new Card("Urshifu1", CONSTANTS.CARD.TYPES.UNITY, "URSHIFU"),
+                ];
+                var cardsPlayer2 = [
+                    new Card("Hoopa", CONSTANTS.CARD.TYPES.UNITY, "HOOPA"),
+                    new Card("Hoopa1", CONSTANTS.CARD.TYPES.UNITY, "HOOPA"),
+                    new Card("Inteleon", CONSTANTS.CARD.TYPES.UNITY, "INTELEON"),
+                    new Card("Inteleon1", CONSTANTS.CARD.TYPES.UNITY, "INTELEON"),
+                    new Card("Moltres", CONSTANTS.CARD.TYPES.UNITY, "MOLTRES"),
+                    new Card("Moltres1", CONSTANTS.CARD.TYPES.UNITY, "MOLTRES"),
+                    new Card("Urshifu", CONSTANTS.CARD.TYPES.UNITY, "URSHIFU"),
+                    new Card("Urshifu1", CONSTANTS.CARD.TYPES.UNITY, "URSHIFU"),
+                ];
+
+                var deck1 = new Deck("Deck Teste", cardsPlayer1);
+                var player1 = new Player("PLAYER 1", deck1);
+
+                var deck2 = new Deck("Deck Teste 1", cardsPlayer2);
+                var player2 = new Player("PLAYER 2", deck2)
+
+                this.game = new Game()
+                this.game.player1 = player1;
+                this.game.player2 = player2;
+            },
+            SetShowcaseImage(src){
+                console.log('tste');
+                this.showcaseImage = src;
+            }
+        }
+    });
+</script>
