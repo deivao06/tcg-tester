@@ -9,11 +9,22 @@ var CONSTANTS = {
             STRUCTURE: "structure",
             UTILITY: "utility"
         }
+    },
+    GAME: {
+        PHASES: {
+            START_GAME: "Start Game",
+            START: "Start Phase",
+            DRAW: "Draw Phase",
+            POSITION: "Position Phase",
+            ATTACK: "Attack Phase",
+            END: "End Phase",
+        }
     }
 }
 
 var GLOBALS = {
     ASSETS: {
+        BACK: makeImageFromFilePath("../assets/back.png"),
         HOOPA: makeImageFromFilePath("../assets/hoopa.png"),
         INTELEON: makeImageFromFilePath("../assets/inteleon.png"),
         MOLTRES: makeImageFromFilePath("../assets/moltres.png"),

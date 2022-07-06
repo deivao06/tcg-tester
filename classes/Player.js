@@ -10,7 +10,9 @@ export default class Player {
     }
 
     DrawCards(quantity = 1) {
-        var drawedCards = this.deck.Draw(quantity);
-        this.hand = this.hand.concat(drawedCards);
+        if(this.deck.cards.length >= quantity){
+            var drawedCards = this.deck.Draw(quantity);
+            this.hand = this.hand.concat(drawedCards);
+        }
     }
 }

@@ -1,7 +1,8 @@
 export default class Deck {
-    constructor(name, cards = []){
+    constructor(name, cards = [], asset){
         this.name = name;
         this.cards = cards;
+        this.back = asset;
     }
 
     Draw(quantity) {
