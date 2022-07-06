@@ -67,8 +67,7 @@ export default class Game {
         }
         
         console.log(`${this.activePlayer.name} Turn!`)
-
-        this.turn++;
+        
         this.StartPhase();
     }
 }

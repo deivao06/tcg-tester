@@ -31,7 +31,7 @@
                             <div class="slot" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}"></div>
                             <div class="slot deck" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}">
                                 <div class="deck-info">
-                                    <img :src="GLOBALS.ASSETS[game.player2.deck.back].src" width="100%" height="100%">
+                                    <img v-if="game.player2.deck.cards.length > 0" :src="GLOBALS.ASSETS[game.player2.deck.back].src" width="100%" height="100%">
                                     <span>Deck: {{game.player2.deck.cards.length}}</span>
                                 </div>
                             </div>
@@ -44,7 +44,7 @@
                             <div class="slot" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}"></div>
                             <div class="slot deck" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}">                                
                                 <div class="deck-info">
-                                    <img :src="GLOBALS.ASSETS[game.player1.deck.back].src" width="100%" height="100%">
+                                    <img v-if="game.player1.deck.cards.length > 0" :src="GLOBALS.ASSETS[game.player1.deck.back].src" width="100%" height="100%">
                                     <span>Deck: {{game.player1.deck.cards.length}}</span>
                                 </div>
                             </div>
@@ -66,15 +66,22 @@
                     </div>
                 </div>
                 <div class="nav-bar">
-                    <div class="card-showcase">
-                        <img v-if="showcaseImage" :src="showcaseImage" width="100%" height="100%">
+                    <div class="phase-manager">
+                        <button class="btn" :disabled="game.activePlayer != game.player2 || game.phase != CONSTANTS.GAME.PHASES.START" @click="DrawPhase">Draw</button>
+                        <button class="btn" :disabled="game.activePlayer != game.player2 || game.phase != CONSTANTS.GAME.PHASES.DRAW" @click="PositionPhase">Position</button>
+                        <button class="btn" :disabled="game.activePlayer != game.player2 || game.phase != CONSTANTS.GAME.PHASES.POSITION" @click="AttackPhase">Attack</button>
+                        <button class="btn" :disabled="game.activePlayer != game.player2 || game.phase != CONSTANTS.GAME.PHASES.ATTACK" @click="EndPhase">End</button>
                     </div>
                     <div class="phase-manager">
+                        <h1>{{game.activePlayer.name}}</h1>
+                        <h1>Turn: {{game.turn}}</h1>
                         <h1 v-if="game.phase">{{game.phase}}</h1>
-                        <button class="btn" :disabled="game.phase != CONSTANTS.GAME.PHASES.START" @click="DrawPhase">Draw</button>
-                        <button class="btn" :disabled="game.phase != CONSTANTS.GAME.PHASES.DRAW" @click="PositionPhase">Position</button>
-                        <button class="btn" :disabled="game.phase != CONSTANTS.GAME.PHASES.POSITION" @click="AttackPhase">Attack</button>
-                        <button class="btn" :disabled="game.phase != CONSTANTS.GAME.PHASES.ATTACK" @click="EndPhase">End</button>
+                    </div>
+                    <div class="phase-manager">
+                        <button class="btn" :disabled="game.activePlayer != game.player1 || game.phase != CONSTANTS.GAME.PHASES.START" @click="DrawPhase">Draw</button>
+                        <button class="btn" :disabled="game.activePlayer != game.player1 || game.phase != CONSTANTS.GAME.PHASES.DRAW" @click="PositionPhase">Position</button>
+                        <button class="btn" :disabled="game.activePlayer != game.player1 || game.phase != CONSTANTS.GAME.PHASES.POSITION" @click="AttackPhase">Attack</button>
+                        <button class="btn" :disabled="game.activePlayer != game.player1 || game.phase != CONSTANTS.GAME.PHASES.ATTACK" @click="EndPhase">End</button>
                     </div>
                 </div>
             </div>

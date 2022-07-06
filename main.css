@@ -18,12 +18,8 @@ div.nav-bar{
 
 div.nav-bar{
     align-items: center;
-}
-
-div.card-showcase{
-    width: 45%;
-    height: 350px;
-    margin: 10px;
+    justify-content: space-between;
+    margin-top: 15px;
 }
 
 .player2, 
