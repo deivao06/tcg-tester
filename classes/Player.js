@@ -27,8 +27,8 @@ export default class Player {
         if(this[slot] == null){
             this[slot] = card;
 
-            var cardIndex = this.hand.indexOf(card);
-            if(cardIndex){
+            var cardIndex = this.hand.indexOf(card);            
+            if(cardIndex > -1){
                 this.hand.splice(cardIndex, 1);
             }
         }

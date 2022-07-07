@@ -19,8 +19,8 @@ export default class Game {
         this.player2.deck.Shuffle();
 
         console.log("Drawing 5 cards for each player!")
-        this.player1.DrawCards(5);
-        this.player2.DrawCards(5);
+        this.player1.DrawCards(3);
+        this.player2.DrawCards(3);
 
         this.activePlayer = this.player1;
         console.log(`${this.activePlayer.name} Turn!`)
