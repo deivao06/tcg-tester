@@ -70,4 +70,12 @@ export default class Game {
         
         this.StartPhase();
     }
+
+    isActivePlayerCard = function(card){
+        return this.activePlayer.hand.includes(card);
+    }    
+
+    isPositionPhase = function(){
+        return this.phase == CONSTANTS.GAME.PHASES.POSITION;
+    }
 }

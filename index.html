@@ -16,9 +16,9 @@
                                 v-for="card in game.player2.hand" 
                                 :src="GLOBALS.ASSETS[card.asset].src" 
                                 :width="CONSTANTS.CARD.SIZES.WIDTH" 
-                                :height="CONSTANTS.CARD.SIZES.HEIGHT" 
-                                @mouseover="SetShowcaseImage(GLOBALS.ASSETS[card.asset].src)"
-                                @click="CardOptions(card)"
+                                :height="CONSTANTS.CARD.SIZES.HEIGHT"
+                                :class="{'selected-card': card == selectedCard}" 
+                                @click="SelectCard(card)"
                             >
                         </div>
                         <div class="slots back">
@@ -70,18 +70,36 @@
                     </div>
                     <div class="player1">
                         <div class="slots front">
-                            <div class="slot unity" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}">
+                            <div 
+                                class="slot unity" 
+                                :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}"
+                                :class="unityClassObject"
+                                @click="PlaceCard(CONSTANTS.GAME.SLOTS.UNITY_SLOT_1, CONSTANTS.CARD.TYPES.UNITY)"
+                            >
                                 <div class="info">
+                                    <img v-if="game.player1.unitySlot1" :src="GLOBALS.ASSETS[game.player1.unitySlot1.asset].src" width="100%" height="100%">
                                     <span>{{CONSTANTS.CARD.TYPES.UNITY}}</span>
                                 </div>
                             </div>
-                            <div class="slot unity" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}">
+                            <div 
+                                class="slot unity" 
+                                :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}"
+                                :class="unityClassObject"
+                                @click="PlaceCard(CONSTANTS.GAME.SLOTS.UNITY_SLOT_2, CONSTANTS.CARD.TYPES.UNITY)"
+                            >
                                 <div class="info">
+                                    <img v-if="game.player1.unitySlot2" :src="GLOBALS.ASSETS[game.player1.unitySlot2.asset].src" width="100%" height="100%">
                                     <span>{{CONSTANTS.CARD.TYPES.UNITY}}</span>
                                 </div>
                             </div>
-                            <div class="slot unity" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}">
+                            <div 
+                                class="slot unity" 
+                                :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}"
+                                :class="unityClassObject"
+                                @click="PlaceCard(CONSTANTS.GAME.SLOTS.UNITY_SLOT_3, CONSTANTS.CARD.TYPES.UNITY)"
+                            >
                                 <div class="info">
+                                    <img v-if="game.player1.unitySlot3" :src="GLOBALS.ASSETS[game.player1.unitySlot3.asset].src" width="100%" height="100%">
                                     <span>{{CONSTANTS.CARD.TYPES.UNITY}}</span>
                                 </div>
                             </div>
@@ -93,18 +111,36 @@
                             </div>
                         </div>
                         <div class="slots back">
-                            <div class="slot structure" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}">
+                            <div 
+                                class="slot structure" 
+                                :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}"
+                                :class="structureClassObject"
+                                @click="PlaceCard(CONSTANTS.GAME.SLOTS.STRUCTURE_SLOT_1, CONSTANTS.CARD.TYPES.STRUCTURE)"
+                            >
                                 <div class="info">
+                                    <img v-if="game.player1.structureSlot1" :src="GLOBALS.ASSETS[game.player1.structureSlot1.asset].src" width="100%" height="100%">
                                     <span>{{CONSTANTS.CARD.TYPES.STRUCTURE}}</span>
                                 </div>
                             </div>
-                            <div class="slot utility" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}">
+                            <div 
+                                class="slot utility" 
+                                :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}"
+                                :class="utilityClassObject"
+                                @click="PlaceCard(CONSTANTS.GAME.SLOTS.UTILITY_SLOT, CONSTANTS.CARD.TYPES.UTILITY)"
+                            >
                                 <div class="info">
+                                    <img v-if="game.player1.utilitySlot" :src="GLOBALS.ASSETS[game.player1.utilitySlot.asset].src" width="100%" height="100%">
                                     <span>{{CONSTANTS.CARD.TYPES.UTILITY}}</span>
                                 </div>
                             </div>
-                            <div class="slot structure" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}">
+                            <div 
+                                class="slot structure" 
+                                :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}"
+                                :class="structureClassObject"
+                                @click="PlaceCard(CONSTANTS.GAME.SLOTS.STRUCTURE_SLOT_2, CONSTANTS.CARD.TYPES.STRUCTURE)"
+                            >
                                 <div class="info">
+                                    <img v-if="game.player1.structureSlot2" :src="GLOBALS.ASSETS[game.player1.structureSlot2.asset].src" width="100%" height="100%">
                                     <span>{{CONSTANTS.CARD.TYPES.STRUCTURE}}</span>
                                 </div>
                             </div>
@@ -120,14 +156,14 @@
                                 v-for="card in game.player1.hand" 
                                 :src="GLOBALS.ASSETS[card.asset].src" 
                                 :width="CONSTANTS.CARD.SIZES.WIDTH" 
-                                :height="CONSTANTS.CARD.SIZES.HEIGHT" 
-                                @mouseover="SetShowcaseImage(GLOBALS.ASSETS[card.asset].src)"
-                                @click="CardOptions(card)"    
+                                :height="CONSTANTS.CARD.SIZES.HEIGHT"
+                                :class="{'selected-card': card == selectedCard}" 
+                                @click="SelectCard(card)"    
                             >
                         </div>
                     </div>
                 </div>
-                <div class="nav-bar">
+                <div class="nav-bar" @click="selectedCard = null">
                     <div class="phase-manager">
                         <button class="btn" :disabled="game.activePlayer != game.player2 || game.phase != CONSTANTS.GAME.PHASES.START" @click="DrawPhase">Draw</button>
                         <button class="btn" :disabled="game.activePlayer != game.player2 || game.phase != CONSTANTS.GAME.PHASES.DRAW" @click="PositionPhase">Position</button>
@@ -165,8 +201,7 @@
             game: null,
             CONSTANTS: CONSTANTS,
             GLOBALS: GLOBALS,
-
-            showcaseImage: null,
+            selectedCard: null,
         },
         mounted: function(){
             this.StartGame();
@@ -178,8 +213,8 @@
             },
             SetupGame: function(){
                 var cardsPlayer1 = [
-                    new Card("Hoopa", CONSTANTS.CARD.TYPES.UNITY, "HOOPA"),
-                    new Card("Hoopa1", CONSTANTS.CARD.TYPES.UNITY, "HOOPA"),
+                    new Card("Hoopa", CONSTANTS.CARD.TYPES.STRUCTURE, "HOOPA"),
+                    new Card("Hoopa1", CONSTANTS.CARD.TYPES.STRUCTURE, "HOOPA"),
                     new Card("Inteleon", CONSTANTS.CARD.TYPES.UNITY, "INTELEON"),
                     new Card("Inteleon1", CONSTANTS.CARD.TYPES.UNITY, "INTELEON"),
                     new Card("Moltres", CONSTANTS.CARD.TYPES.UNITY, "MOLTRES"),
@@ -219,15 +254,40 @@
             },
             EndPhase: function(){
                 this.game.EndPhase();
+            },            
+            SelectCard: function(card){
+                if(this.game.isPositionPhase()){
+                    if(this.game.isActivePlayerCard(card)){
+                        this.selectedCard = card;
+                    }else{
+                        //TODO
+                    }
+                }
             },
-            SetShowcaseImage: function(src){
-                this.showcaseImage = src;
+            PlaceCard: function(slot, type){
+                if(this.game.isPositionPhase() && this.selectedCard.type == type){
+                    this.game.activePlayer.PlaceCard(this.selectedCard, slot);
+                    this.selectedCard = null;
+                }
+            }
+        },
+        computed: {
+            unityClassObject: function () {
+                return {
+                    'btn': this.game.isPositionPhase() && (this.selectedCard && this.selectedCard.type == CONSTANTS.CARD.TYPES.UNITY),
+                    'btn-slot': this.game.isPositionPhase() && (this.selectedCard && this.selectedCard.type == CONSTANTS.CARD.TYPES.UNITY),
+                }
             },
-            CardOptions: function(card){
-                if(this.game.activePlayer.hand.includes(card)){
-                    console.log("o card é seu");
-                }else{
-                    console.log("o card não é seu");
+            utilityClassObject: function () {
+                return {
+                    'btn': this.game.isPositionPhase() && (this.selectedCard && this.selectedCard.type == CONSTANTS.CARD.TYPES.UTILITY),
+                    'btn-slot': this.game.isPositionPhase() && (this.selectedCard && this.selectedCard.type == CONSTANTS.CARD.TYPES.UTILITY),
+                }
+            },
+            structureClassObject: function () {
+                return {
+                    'btn': this.game.isPositionPhase() && (this.selectedCard && this.selectedCard.type == CONSTANTS.CARD.TYPES.STRUCTURE),
+                    'btn-slot': this.game.isPositionPhase() && (this.selectedCard && this.selectedCard.type == CONSTANTS.CARD.TYPES.STRUCTURE),
                 }
             }
         }

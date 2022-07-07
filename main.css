@@ -88,6 +88,11 @@ div.nav-bar{
     box-shadow: 3px 3px 5px black;
 }
 
+.btn.btn-slot{
+    color: black;
+    padding: 0px 0px !important;
+}
+
 .btn:hover{
     background-color: green;
     cursor: pointer;
@@ -104,4 +109,8 @@ div.nav-bar{
 
 .slot .info{
     text-align: center;
+}
+
+.selected-card{
+    border: 5px solid green;
 }
