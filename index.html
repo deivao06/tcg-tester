@@ -12,25 +12,56 @@
                 <div class="game">
                     <div class="player2">
                         <div class="hand">
-                            <img v-for="card in game.player2.hand" :src="GLOBALS.ASSETS[card.asset].src" :width="CONSTANTS.CARD.SIZES.WIDTH" :height="CONSTANTS.CARD.SIZES.HEIGHT" @mouseover="SetShowcaseImage(GLOBALS.ASSETS[card.asset].src)">
+                            <img 
+                                v-for="card in game.player2.hand" 
+                                :src="GLOBALS.ASSETS[card.asset].src" 
+                                :width="CONSTANTS.CARD.SIZES.WIDTH" 
+                                :height="CONSTANTS.CARD.SIZES.HEIGHT" 
+                                @mouseover="SetShowcaseImage(GLOBALS.ASSETS[card.asset].src)"
+                                @click="CardOptions(card)"
+                            >
                         </div>
                         <div class="slots back">
-                            <div class="slot" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}"></div>
-                            <div class="slot" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}"></div>
-                            <div class="slot" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}"></div>
+                            <div class="slot structure" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}">
+                                <div class="info">
+                                    <span>{{CONSTANTS.CARD.TYPES.STRUCTURE}}</span>
+                                </div>
+                            </div>
+                            <div class="slot utility" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}">
+                                <div class="info">
+                                    <span>{{CONSTANTS.CARD.TYPES.UTILITY}}</span>
+                                </div>
+                            </div>
+                            <div class="slot structure" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}">
+                                <div class="info">
+                                    <span>{{CONSTANTS.CARD.TYPES.STRUCTURE}}</span>
+                                </div>
+                            </div>
                             <div class="slot discard" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}">
-                                <div class="discard-info">
+                                <div class="info">
                                     <img width="100%" height="100%">
                                     <span>Discard: {{game.player2.discard.length}}</span>
                                 </div>
                             </div>
                         </div>
                         <div class="slots front">
-                            <div class="slot" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}"></div>
-                            <div class="slot" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}"></div>
-                            <div class="slot" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}"></div>
+                            <div class="slot unity" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}">
+                                <div class="info">
+                                    <span>{{CONSTANTS.CARD.TYPES.UNITY}}</span>
+                                </div>
+                            </div>
+                            <div class="slot unity" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}">
+                                <div class="info">
+                                    <span>{{CONSTANTS.CARD.TYPES.UNITY}}</span>
+                                </div>
+                            </div>
+                            <div class="slot unity" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}">
+                                <div class="info">
+                                    <span>{{CONSTANTS.CARD.TYPES.UNITY}}</span>
+                                </div>
+                            </div>
                             <div class="slot deck" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}">
-                                <div class="deck-info">
+                                <div class="info">
                                     <img v-if="game.player2.deck.cards.length > 0" :src="GLOBALS.ASSETS[game.player2.deck.back].src" width="100%" height="100%">
                                     <span>Deck: {{game.player2.deck.cards.length}}</span>
                                 </div>
@@ -38,30 +69,61 @@
                         </div>
                     </div>
                     <div class="player1">
-                        <div class="slots back">
-                            <div class="slot" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}"></div>
-                            <div class="slot" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}"></div>
-                            <div class="slot" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}"></div>
+                        <div class="slots front">
+                            <div class="slot unity" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}">
+                                <div class="info">
+                                    <span>{{CONSTANTS.CARD.TYPES.UNITY}}</span>
+                                </div>
+                            </div>
+                            <div class="slot unity" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}">
+                                <div class="info">
+                                    <span>{{CONSTANTS.CARD.TYPES.UNITY}}</span>
+                                </div>
+                            </div>
+                            <div class="slot unity" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}">
+                                <div class="info">
+                                    <span>{{CONSTANTS.CARD.TYPES.UNITY}}</span>
+                                </div>
+                            </div>
                             <div class="slot deck" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}">                                
-                                <div class="deck-info">
+                                <div class="info">
                                     <img v-if="game.player1.deck.cards.length > 0" :src="GLOBALS.ASSETS[game.player1.deck.back].src" width="100%" height="100%">
                                     <span>Deck: {{game.player1.deck.cards.length}}</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="slots front">
-                            <div class="slot" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}"></div>
-                            <div class="slot" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}"></div>
-                            <div class="slot" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}"></div>
+                        <div class="slots back">
+                            <div class="slot structure" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}">
+                                <div class="info">
+                                    <span>{{CONSTANTS.CARD.TYPES.STRUCTURE}}</span>
+                                </div>
+                            </div>
+                            <div class="slot utility" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}">
+                                <div class="info">
+                                    <span>{{CONSTANTS.CARD.TYPES.UTILITY}}</span>
+                                </div>
+                            </div>
+                            <div class="slot structure" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}">
+                                <div class="info">
+                                    <span>{{CONSTANTS.CARD.TYPES.STRUCTURE}}</span>
+                                </div>
+                            </div>
                             <div class="slot discard" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}">
-                                <div class="discard-info">
+                                <div class="info">
                                     <img width="100%" height="100%">
                                     <span>Discard: {{game.player1.discard.length}}</span>
                                 </div>
                             </div>
                         </div>
                         <div class="hand">
-                            <img v-for="card in game.player1.hand" :src="GLOBALS.ASSETS[card.asset].src" :width="CONSTANTS.CARD.SIZES.WIDTH" :height="CONSTANTS.CARD.SIZES.HEIGHT" @mouseover="SetShowcaseImage(GLOBALS.ASSETS[card.asset].src)">
+                            <img 
+                                v-for="card in game.player1.hand" 
+                                :src="GLOBALS.ASSETS[card.asset].src" 
+                                :width="CONSTANTS.CARD.SIZES.WIDTH" 
+                                :height="CONSTANTS.CARD.SIZES.HEIGHT" 
+                                @mouseover="SetShowcaseImage(GLOBALS.ASSETS[card.asset].src)"
+                                @click="CardOptions(card)"    
+                            >
                         </div>
                     </div>
                 </div>
@@ -160,6 +222,13 @@
             },
             SetShowcaseImage: function(src){
                 this.showcaseImage = src;
+            },
+            CardOptions: function(card){
+                if(this.game.activePlayer.hand.includes(card)){
+                    console.log("o card é seu");
+                }else{
+                    console.log("o card não é seu");
+                }
             }
         }
     });

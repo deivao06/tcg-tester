@@ -102,7 +102,6 @@ div.nav-bar{
     pointer-events: none;
 }
 
-.deck-info,
-.discard-info{
+.slot .info{
     text-align: center;
 }
