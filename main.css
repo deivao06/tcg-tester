@@ -60,7 +60,17 @@ div.nav-bar{
 .slot{
     border: 1px solid grey;
     margin: 10px;
-    box-shadow: 2px 2px 1px grey;
+    border-radius: 6px;
+}
+
+.slot .info{
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .slot.deck,
@@ -105,10 +115,6 @@ div.nav-bar{
 .btn:disabled{
     opacity: 0.5;
     pointer-events: none;
-}
-
-.slot .info{
-    text-align: center;
 }
 
 .selected-card{

@@ -18,8 +18,13 @@ export default class Player {
 
     DrawCards(quantity = 1) {
         if(this.deck.cards.length >= quantity){
+            var name = this.name;
             var drawedCards = this.deck.Draw(quantity);
             this.hand = this.hand.concat(drawedCards);
+
+            drawedCards.forEach(function(card){
+                console.log(`Drawed ${card.name} | ${name}`);
+            })
         }
     }
 

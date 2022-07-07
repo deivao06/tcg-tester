@@ -57,7 +57,7 @@
                             </div>
                             <div class="slot discard" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}">
                                 <div class="info">
-                                    <img width="100%" height="100%">
+                                    <img v-if="game.player2.discard.length" width="100%" height="100%">
                                     <span>Discard: {{game.player2.discard.length}}</span>
                                 </div>
                             </div>
@@ -182,7 +182,7 @@
                             </div>
                             <div class="slot discard" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}">
                                 <div class="info">
-                                    <img width="100%" height="100%">
+                                    <img v-if="game.player1.discard.length" width="100%" height="100%">
                                     <span>Discard: {{game.player1.discard.length}}</span>
                                 </div>
                             </div>

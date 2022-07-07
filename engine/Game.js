@@ -11,7 +11,7 @@ export default class Game {
     }
 
     Start = function(){
-        console.log("Game Started!");
+        console.log("%cGame Started!", "color:green; font-size: 16px; font-weight: bold");
         this.phase = CONSTANTS.GAME.PHASES.START_GAME;
 
         console.log("Shuffling both decks!");
@@ -23,19 +23,19 @@ export default class Game {
         this.player2.DrawCards(5);
 
         this.activePlayer = this.player1;
-        console.log(`${this.activePlayer.name} Turn!`)
+        console.log(`%c${this.activePlayer.name} Turn!`, "color:green; font-size: 16px; font-weight: bold");
 
         this.StartPhase();
     }
 
     StartPhase = function(){
-        console.log(`${CONSTANTS.GAME.PHASES.START}! | ${this.activePlayer.name}`);
+        console.log(`%c${CONSTANTS.GAME.PHASES.START}! | ${this.activePlayer.name}`, "color:green; font-size: 16px; font-weight: bold");
         this.phase = CONSTANTS.GAME.PHASES.START;
         this.turn ++;
     }
 
     DrawPhase = function(){
-        console.log(`${CONSTANTS.GAME.PHASES.DRAW}! | ${this.activePlayer.name}`);
+        console.log(`%c${CONSTANTS.GAME.PHASES.DRAW}! | ${this.activePlayer.name}`, "color:green; font-size: 16px; font-weight: bold");
         this.phase = CONSTANTS.GAME.PHASES.DRAW;
         
 
@@ -43,17 +43,17 @@ export default class Game {
     }
 
     PositionPhase = function(){
-        console.log(`${CONSTANTS.GAME.PHASES.POSITION}! | ${this.activePlayer.name}`);
+        console.log(`%c${CONSTANTS.GAME.PHASES.POSITION}! | ${this.activePlayer.name}`, "color:green; font-size: 16px; font-weight: bold");
         this.phase = CONSTANTS.GAME.PHASES.POSITION;
     }
 
     AttackPhase = function(){
-        console.log(`${CONSTANTS.GAME.PHASES.ATTACK}! | ${this.activePlayer.name}`);
+        console.log(`%c${CONSTANTS.GAME.PHASES.ATTACK}! | ${this.activePlayer.name}`, "color:green; font-size: 16px; font-weight: bold");
         this.phase = CONSTANTS.GAME.PHASES.ATTACK;
     }
 
     EndPhase = function(){
-        console.log(`${CONSTANTS.GAME.PHASES.END}! | ${this.activePlayer.name}`);
+        console.log(`%c${CONSTANTS.GAME.PHASES.END}! | ${this.activePlayer.name}`, "color:green; font-size: 16px; font-weight: bold");
         this.phase = CONSTANTS.GAME.PHASES.END;
 
         this.ChangeTurn();
@@ -66,7 +66,7 @@ export default class Game {
             this.activePlayer = this.player1
         }
         
-        console.log(`${this.activePlayer.name} Turn!`)
+        console.log(`%c${this.activePlayer.name} Turn!`, "color:green; font-size: 16px; font-weight: bold");
         
         this.StartPhase();
     }
