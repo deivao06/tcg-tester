@@ -19,6 +19,8 @@
                                 :height="CONSTANTS.CARD.SIZES.HEIGHT"
                                 :class="{'selected-card': card == selectedCard}" 
                                 @click="SelectCard(card)"
+                                @mouseover="hoveredCard = card"
+                                @mouseleave="hoveredCard = null"
                             >
                         </div>
                         <div class="slots back">
@@ -29,7 +31,13 @@
                                 @click="PlaceCard(CONSTANTS.GAME.SLOTS.STRUCTURE_SLOT_1, CONSTANTS.CARD.TYPES.STRUCTURE, game.player2)"
                             >
                                 <div class="info">
-                                    <img v-if="game.player2.structureSlot1" :src="GLOBALS.ASSETS[game.player2.structureSlot1.asset].src" width="100%" height="100%">
+                                    <img 
+                                        v-if="game.player2.structureSlot1" 
+                                        :src="GLOBALS.ASSETS[game.player2.structureSlot1.asset].src" 
+                                        width="100%" height="100%"
+                                        @mouseover="hoveredCard = game.player2.structureSlot1"
+                                        @mouseleave="hoveredCard = null"
+                                    >
                                     <span>{{CONSTANTS.CARD.TYPES.STRUCTURE}}</span>
                                 </div>
                             </div>
@@ -40,7 +48,13 @@
                                 @click="PlaceCard(CONSTANTS.GAME.SLOTS.UTILITY_SLOT, CONSTANTS.CARD.TYPES.UTILITY, game.player2)"
                             >
                                 <div class="info">
-                                    <img v-if="game.player2.utilitySlot" :src="GLOBALS.ASSETS[game.player2.utilitySlot.asset].src" width="100%" height="100%">
+                                    <img 
+                                        v-if="game.player2.utilitySlot" 
+                                        :src="GLOBALS.ASSETS[game.player2.utilitySlot.asset].src" 
+                                        width="100%" height="100%"
+                                        @mouseover="hoveredCard = game.player2.utilitySlot"
+                                        @mouseleave="hoveredCard = null"
+                                    >
                                     <span>{{CONSTANTS.CARD.TYPES.UTILITY}}</span>
                                 </div>
                             </div>
@@ -51,7 +65,13 @@
                                 @click="PlaceCard(CONSTANTS.GAME.SLOTS.STRUCTURE_SLOT_2, CONSTANTS.CARD.TYPES.STRUCTURE, game.player2)"
                             >
                                 <div class="info">
-                                    <img v-if="game.player2.structureSlot2" :src="GLOBALS.ASSETS[game.player2.structureSlot2.asset].src" width="100%" height="100%">
+                                    <img 
+                                        v-if="game.player2.structureSlot2" 
+                                        :src="GLOBALS.ASSETS[game.player2.structureSlot2.asset].src" 
+                                        width="100%" height="100%"
+                                        @mouseover="hoveredCard = game.player2.structureSlot2"
+                                        @mouseleave="hoveredCard = null"
+                                    >
                                     <span>{{CONSTANTS.CARD.TYPES.STRUCTURE}}</span>
                                 </div>
                             </div>
@@ -70,7 +90,13 @@
                                 @click="PlaceCard(CONSTANTS.GAME.SLOTS.UNITY_SLOT_1, CONSTANTS.CARD.TYPES.UNITY, game.player2)"
                             >
                                 <div class="info">
-                                    <img v-if="game.player2.unitySlot1" :src="GLOBALS.ASSETS[game.player2.unitySlot1.asset].src" width="100%" height="100%">
+                                    <img 
+                                        v-if="game.player2.unitySlot1" 
+                                        :src="GLOBALS.ASSETS[game.player2.unitySlot1.asset].src" 
+                                        width="100%" height="100%"
+                                        @mouseover="hoveredCard = game.player2.unitySlot1"
+                                        @mouseleave="hoveredCard = null"
+                                    >
                                     <span>{{CONSTANTS.CARD.TYPES.UNITY}}</span>
                                 </div>
                             </div>
@@ -81,7 +107,13 @@
                                 @click="PlaceCard(CONSTANTS.GAME.SLOTS.UNITY_SLOT_2, CONSTANTS.CARD.TYPES.UNITY, game.player2)"
                             >
                                 <div class="info">
-                                    <img v-if="game.player2.unitySlot2" :src="GLOBALS.ASSETS[game.player2.unitySlot2.asset].src" width="100%" height="100%">
+                                    <img 
+                                        v-if="game.player2.unitySlot2" 
+                                        :src="GLOBALS.ASSETS[game.player2.unitySlot2.asset].src" 
+                                        width="100%" height="100%"
+                                        @mouseover="hoveredCard = game.player2.unitySlot2"
+                                        @mouseleave="hoveredCard = null"
+                                    >
                                     <span>{{CONSTANTS.CARD.TYPES.UNITY}}</span>
                                 </div>
                             </div>
@@ -92,7 +124,13 @@
                                 @click="PlaceCard(CONSTANTS.GAME.SLOTS.UNITY_SLOT_3, CONSTANTS.CARD.TYPES.UNITY, game.player2)"
                             >
                                 <div class="info">
-                                    <img v-if="game.player2.unitySlot3" :src="GLOBALS.ASSETS[game.player2.unitySlot3.asset].src" width="100%" height="100%">
+                                    <img 
+                                        v-if="game.player2.unitySlot3" 
+                                        :src="GLOBALS.ASSETS[game.player2.unitySlot3.asset].src" 
+                                        width="100%" height="100%"
+                                        @mouseover="hoveredCard = game.player2.unitySlot3"
+                                        @mouseleave="hoveredCard = null"
+                                    >
                                     <span>{{CONSTANTS.CARD.TYPES.UNITY}}</span>
                                 </div>
                             </div>
@@ -113,7 +151,13 @@
                                 @click="PlaceCard(CONSTANTS.GAME.SLOTS.UNITY_SLOT_1, CONSTANTS.CARD.TYPES.UNITY, game.player1)"
                             >
                                 <div class="info">
-                                    <img v-if="game.player1.unitySlot1" :src="GLOBALS.ASSETS[game.player1.unitySlot1.asset].src" width="100%" height="100%">
+                                    <img 
+                                        v-if="game.player1.unitySlot1" 
+                                        :src="GLOBALS.ASSETS[game.player1.unitySlot1.asset].src" 
+                                        width="100%" height="100%"
+                                        @mouseover="hoveredCard = game.player1.unitySlot1"
+                                        @mouseleave="hoveredCard = null"
+                                    >
                                     <span>{{CONSTANTS.CARD.TYPES.UNITY}}</span>
                                 </div>
                             </div>
@@ -124,7 +168,13 @@
                                 @click="PlaceCard(CONSTANTS.GAME.SLOTS.UNITY_SLOT_2, CONSTANTS.CARD.TYPES.UNITY, game.player1)"
                             >
                                 <div class="info">
-                                    <img v-if="game.player1.unitySlot2" :src="GLOBALS.ASSETS[game.player1.unitySlot2.asset].src" width="100%" height="100%">
+                                    <img 
+                                        v-if="game.player1.unitySlot2" 
+                                        :src="GLOBALS.ASSETS[game.player1.unitySlot2.asset].src" 
+                                        width="100%" height="100%"
+                                        @mouseover="hoveredCard = game.player1.unitySlot2"
+                                        @mouseleave="hoveredCard = null"
+                                    >
                                     <span>{{CONSTANTS.CARD.TYPES.UNITY}}</span>
                                 </div>
                             </div>
@@ -135,7 +185,13 @@
                                 @click="PlaceCard(CONSTANTS.GAME.SLOTS.UNITY_SLOT_3, CONSTANTS.CARD.TYPES.UNITY, game.player1)"
                             >
                                 <div class="info">
-                                    <img v-if="game.player1.unitySlot3" :src="GLOBALS.ASSETS[game.player1.unitySlot3.asset].src" width="100%" height="100%">
+                                    <img 
+                                        v-if="game.player1.unitySlot3" 
+                                        :src="GLOBALS.ASSETS[game.player1.unitySlot3.asset].src" 
+                                        width="100%" height="100%"
+                                        @mouseover="hoveredCard = game.player1.unitySlot3"
+                                        @mouseleave="hoveredCard = null"
+                                    >
                                     <span>{{CONSTANTS.CARD.TYPES.UNITY}}</span>
                                 </div>
                             </div>
@@ -154,7 +210,13 @@
                                 @click="PlaceCard(CONSTANTS.GAME.SLOTS.STRUCTURE_SLOT_1, CONSTANTS.CARD.TYPES.STRUCTURE, game.player1)"
                             >
                                 <div class="info">
-                                    <img v-if="game.player1.structureSlot1" :src="GLOBALS.ASSETS[game.player1.structureSlot1.asset].src" width="100%" height="100%">
+                                    <img 
+                                        v-if="game.player1.structureSlot1" 
+                                        :src="GLOBALS.ASSETS[game.player1.structureSlot1.asset].src" 
+                                        width="100%" height="100%"
+                                        @mouseover="hoveredCard = game.player1.structureSlot1"
+                                        @mouseleave="hoveredCard = null"
+                                    >
                                     <span>{{CONSTANTS.CARD.TYPES.STRUCTURE}}</span>
                                 </div>
                             </div>
@@ -165,7 +227,13 @@
                                 @click="PlaceCard(CONSTANTS.GAME.SLOTS.UTILITY_SLOT, CONSTANTS.CARD.TYPES.UTILITY, game.player1)"
                             >
                                 <div class="info">
-                                    <img v-if="game.player1.utilitySlot" :src="GLOBALS.ASSETS[game.player1.utilitySlot.asset].src" width="100%" height="100%">
+                                    <img 
+                                        v-if="game.player1.utilitySlot" 
+                                        :src="GLOBALS.ASSETS[game.player1.utilitySlot.asset].src" 
+                                        width="100%" height="100%"
+                                        @mouseover="hoveredCard = game.player1.utilitySlot"
+                                        @mouseleave="hoveredCard = null"
+                                    >
                                     <span>{{CONSTANTS.CARD.TYPES.UTILITY}}</span>
                                 </div>
                             </div>
@@ -176,7 +244,13 @@
                                 @click="PlaceCard(CONSTANTS.GAME.SLOTS.STRUCTURE_SLOT_2, CONSTANTS.CARD.TYPES.STRUCTURE, game.player1)"
                             >
                                 <div class="info">
-                                    <img v-if="game.player1.structureSlot2" :src="GLOBALS.ASSETS[game.player1.structureSlot2.asset].src" width="100%" height="100%">
+                                    <img 
+                                        v-if="game.player1.structureSlot2" 
+                                        :src="GLOBALS.ASSETS[game.player1.structureSlot2.asset].src" 
+                                        width="100%" height="100%"
+                                        @mouseover="hoveredCard = game.player1.structureSlot2"
+                                        @mouseleave="hoveredCard = null"
+                                    >
                                     <span>{{CONSTANTS.CARD.TYPES.STRUCTURE}}</span>
                                 </div>
                             </div>
@@ -194,7 +268,9 @@
                                 :width="CONSTANTS.CARD.SIZES.WIDTH" 
                                 :height="CONSTANTS.CARD.SIZES.HEIGHT"
                                 :class="{'selected-card': card == selectedCard}" 
-                                @click="SelectCard(card)"    
+                                @click="SelectCard(card)"
+                                @mouseover="hoveredCard = card"
+                                @mouseleave="hoveredCard = null"
                             >
                         </div>
                     </div>
@@ -206,10 +282,38 @@
                         <button class="btn" :disabled="game.activePlayer != game.player2 || game.phase != CONSTANTS.GAME.PHASES.POSITION" @click="AttackPhase">Attack</button>
                         <button class="btn" :disabled="game.activePlayer != game.player2 || game.phase != CONSTANTS.GAME.PHASES.ATTACK" @click="EndPhase">End</button>
                     </div>
+                    <div class="card-showcase">
+                        <div class="showcase">
+                            <img 
+                                v-if="hoveredCard && game.activePlayer == game.player2" 
+                                :src="GLOBALS.ASSETS[hoveredCard.asset].src" 
+                                width="100%" height="100%"
+                            >
+                        </div>
+                    </div>
                     <div class="phase-manager">
                         <h1>{{game.activePlayer.name}}</h1>
                         <h1>Turn: {{game.turn}}</h1>
                         <h1 v-if="game.phase">{{game.phase}}</h1>
+                    </div>
+                    <div class="card-showcase">
+                        <div class="showcase">
+                            <img 
+                                v-if="hoveredCard && game.activePlayer == game.player1" 
+                                :src="GLOBALS.ASSETS[hoveredCard.asset].src" 
+                                width="100%" height="100%"
+                            >
+                        </div>
+                        <div class="info">
+                            <div v-if="hoveredCard && game.activePlayer == game.player1">
+                                <h1>HP: {{hoveredCard.currentHP}}</h1>
+                                <h1>ATK: {{hoveredCard.currentATK}}</h1>
+                                <h1>COST: {{hoveredCard.currentCost}}</h1>
+                            </div>
+                        </div>
+                        <div class="options">
+
+                        </div>
                     </div>
                     <div class="phase-manager">
                         <button class="btn" :disabled="game.activePlayer != game.player1 || game.phase != CONSTANTS.GAME.PHASES.START" @click="DrawPhase">Draw</button>
@@ -238,6 +342,7 @@
             CONSTANTS: CONSTANTS,
             GLOBALS: GLOBALS,
             selectedCard: null,
+            hoveredCard: null,
         },
         mounted: function(){
             this.StartGame();

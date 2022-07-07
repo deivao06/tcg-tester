@@ -19,7 +19,7 @@ div.nav-bar{
 div.nav-bar{
     align-items: center;
     justify-content: space-between;
-    margin-top: 15px;
+    margin: 15px;
 }
 
 .player2, 
@@ -119,4 +119,29 @@ div.nav-bar{
 
 .selected-card{
     border: 5px solid green;
+}
+
+.card-showcase{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;    
+    margin: 10px;
+}
+
+.card-showcase .showcase,
+.card-showcase .info,
+.card-showcase .options{
+    height: 280px;
+}
+
+.card-showcase .info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-showcase .options{
+    width: 35%;
 }
