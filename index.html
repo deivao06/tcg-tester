@@ -292,8 +292,9 @@
                         </div>
                     </div>
                     <div class="phase-manager">
-                        <h1>{{game.activePlayer.name}}</h1>
-                        <h1>Turn: {{game.turn}}</h1>
+                        <h1>Turn: {{game.activePlayer.name}}</h1>
+                        <h1>Coins: {{game.activePlayer.coins}}</h1>
+                        <h1>Round: {{game.round}}</h1>
                         <h1 v-if="game.phase">{{game.phase}}</h1>
                     </div>
                     <div class="card-showcase">
@@ -354,24 +355,24 @@
             },
             SetupGame: function(){
                 var cardsPlayer1 = [
-                    new Card("Hoopa", CONSTANTS.CARD.TYPES.STRUCTURE, "HOOPA"),
-                    new Card("Hoopa1", CONSTANTS.CARD.TYPES.STRUCTURE, "HOOPA"),
-                    new Card("Inteleon", CONSTANTS.CARD.TYPES.UNITY, "INTELEON"),
-                    new Card("Inteleon1", CONSTANTS.CARD.TYPES.UNITY, "INTELEON"),
-                    new Card("Moltres", CONSTANTS.CARD.TYPES.UNITY, "MOLTRES"),
-                    new Card("Moltres1", CONSTANTS.CARD.TYPES.UNITY, "MOLTRES"),
-                    new Card("Urshifu", CONSTANTS.CARD.TYPES.UNITY, "URSHIFU"),
-                    new Card("Urshifu1", CONSTANTS.CARD.TYPES.UNITY, "URSHIFU"),
+                    new Card("Hoopa", CONSTANTS.CARD.TYPES.STRUCTURE, "HOOPA", 0, 0, 1),
+                    new Card("Hoopa1", CONSTANTS.CARD.TYPES.STRUCTURE, "HOOPA", 0, 0, 1),
+                    new Card("Inteleon", CONSTANTS.CARD.TYPES.UNITY, "INTELEON", 0, 0, 1),
+                    new Card("Inteleon1", CONSTANTS.CARD.TYPES.UNITY, "INTELEON", 0, 0, 1),
+                    new Card("Moltres", CONSTANTS.CARD.TYPES.UNITY, "MOLTRES", 0, 0, 1),
+                    new Card("Moltres1", CONSTANTS.CARD.TYPES.UNITY, "MOLTRES", 0, 0, 1),
+                    new Card("Urshifu", CONSTANTS.CARD.TYPES.UNITY, "URSHIFU", 0, 0, 1),
+                    new Card("Urshifu1", CONSTANTS.CARD.TYPES.UNITY, "URSHIFU", 0, 0, 1),
                 ];
                 var cardsPlayer2 = [
-                    new Card("Hoopa", CONSTANTS.CARD.TYPES.STRUCTURE, "HOOPA"),
-                    new Card("Hoopa1", CONSTANTS.CARD.TYPES.STRUCTURE, "HOOPA"),
-                    new Card("Inteleon", CONSTANTS.CARD.TYPES.UNITY, "INTELEON"),
-                    new Card("Inteleon1", CONSTANTS.CARD.TYPES.UNITY, "INTELEON"),
-                    new Card("Moltres", CONSTANTS.CARD.TYPES.UNITY, "MOLTRES"),
-                    new Card("Moltres1", CONSTANTS.CARD.TYPES.UNITY, "MOLTRES"),
-                    new Card("Urshifu", CONSTANTS.CARD.TYPES.UNITY, "URSHIFU"),
-                    new Card("Urshifu1", CONSTANTS.CARD.TYPES.UNITY, "URSHIFU"),
+                    new Card("Hoopa", CONSTANTS.CARD.TYPES.STRUCTURE, "HOOPA", 0, 0, 1),
+                    new Card("Hoopa1", CONSTANTS.CARD.TYPES.STRUCTURE, "HOOPA", 0, 0, 1),
+                    new Card("Inteleon", CONSTANTS.CARD.TYPES.UNITY, "INTELEON", 0, 0, 1),
+                    new Card("Inteleon1", CONSTANTS.CARD.TYPES.UNITY, "INTELEON", 0, 0, 1),
+                    new Card("Moltres", CONSTANTS.CARD.TYPES.UNITY, "MOLTRES", 0, 0, 1),
+                    new Card("Moltres1", CONSTANTS.CARD.TYPES.UNITY, "MOLTRES", 0, 0, 1),
+                    new Card("Urshifu", CONSTANTS.CARD.TYPES.UNITY, "URSHIFU", 0, 0, 1),
+                    new Card("Urshifu1", CONSTANTS.CARD.TYPES.UNITY, "URSHIFU", 0, 0, 1),
                 ];
 
                 var deck1 = new Deck("Deck Teste", cardsPlayer1, "BACK");

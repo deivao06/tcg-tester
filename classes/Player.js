@@ -30,11 +30,20 @@ export default class Player {
 
     PlaceCard(card, slot){
         if(this[slot] == null){
-            this[slot] = card;
+            if(this.coins >= card.currentCost){
+                this[slot] = card;
+    
+                var cardIndex = this.hand.indexOf(card);            
+                if(cardIndex > -1){
+                    this.hand.splice(cardIndex, 1);
+                }
 
-            var cardIndex = this.hand.indexOf(card);            
-            if(cardIndex > -1){
-                this.hand.splice(cardIndex, 1);
+                this.coins -= card.currentCost;
+                if(this.coins < 0){
+                    this.coins = 0;
+                }
+            }else{
+                alert("Você não tem moedas suficientes!");
             }
         }
     }
