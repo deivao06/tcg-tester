@@ -38,7 +38,7 @@
                                         @mouseover="hoveredCard = game.player2.structureSlot1"
                                         @mouseleave="hoveredCard = null"
                                     >
-                                    <span>{{CONSTANTS.CARD.TYPES.STRUCTURE}}</span>
+                                    <span>{{CONSTANTS.CARD.TYPES.STRUCTURE.name}}</span>
                                 </div>
                             </div>
                             <div 
@@ -55,7 +55,7 @@
                                         @mouseover="hoveredCard = game.player2.utilitySlot"
                                         @mouseleave="hoveredCard = null"
                                     >
-                                    <span>{{CONSTANTS.CARD.TYPES.UTILITY}}</span>
+                                    <span>{{CONSTANTS.CARD.TYPES.UTILITY.name}}</span>
                                 </div>
                             </div>
                             <div 
@@ -72,7 +72,7 @@
                                         @mouseover="hoveredCard = game.player2.structureSlot2"
                                         @mouseleave="hoveredCard = null"
                                     >
-                                    <span>{{CONSTANTS.CARD.TYPES.STRUCTURE}}</span>
+                                    <span>{{CONSTANTS.CARD.TYPES.STRUCTURE.name}}</span>
                                 </div>
                             </div>
                             <div class="slot discard" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}">
@@ -97,7 +97,7 @@
                                         @mouseover="hoveredCard = game.player2.unitySlot1"
                                         @mouseleave="hoveredCard = null"
                                     >
-                                    <span>{{CONSTANTS.CARD.TYPES.UNITY}}</span>
+                                    <span>{{CONSTANTS.CARD.TYPES.UNITY.name}}</span>
                                 </div>
                             </div>
                             <div 
@@ -114,7 +114,7 @@
                                         @mouseover="hoveredCard = game.player2.unitySlot2"
                                         @mouseleave="hoveredCard = null"
                                     >
-                                    <span>{{CONSTANTS.CARD.TYPES.UNITY}}</span>
+                                    <span>{{CONSTANTS.CARD.TYPES.UNITY.name}}</span>
                                 </div>
                             </div>
                             <div 
@@ -131,7 +131,7 @@
                                         @mouseover="hoveredCard = game.player2.unitySlot3"
                                         @mouseleave="hoveredCard = null"
                                     >
-                                    <span>{{CONSTANTS.CARD.TYPES.UNITY}}</span>
+                                    <span>{{CONSTANTS.CARD.TYPES.UNITY.name}}</span>
                                 </div>
                             </div>
                             <div class="slot deck" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}">
@@ -158,7 +158,7 @@
                                         @mouseover="hoveredCard = game.player1.unitySlot1"
                                         @mouseleave="hoveredCard = null"
                                     >
-                                    <span>{{CONSTANTS.CARD.TYPES.UNITY}}</span>
+                                    <span>{{CONSTANTS.CARD.TYPES.UNITY.name}}</span>
                                 </div>
                             </div>
                             <div 
@@ -175,7 +175,7 @@
                                         @mouseover="hoveredCard = game.player1.unitySlot2"
                                         @mouseleave="hoveredCard = null"
                                     >
-                                    <span>{{CONSTANTS.CARD.TYPES.UNITY}}</span>
+                                    <span>{{CONSTANTS.CARD.TYPES.UNITY.name}}</span>
                                 </div>
                             </div>
                             <div 
@@ -192,7 +192,7 @@
                                         @mouseover="hoveredCard = game.player1.unitySlot3"
                                         @mouseleave="hoveredCard = null"
                                     >
-                                    <span>{{CONSTANTS.CARD.TYPES.UNITY}}</span>
+                                    <span>{{CONSTANTS.CARD.TYPES.UNITY.name}}</span>
                                 </div>
                             </div>
                             <div class="slot deck" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}">                                
@@ -217,7 +217,7 @@
                                         @mouseover="hoveredCard = game.player1.structureSlot1"
                                         @mouseleave="hoveredCard = null"
                                     >
-                                    <span>{{CONSTANTS.CARD.TYPES.STRUCTURE}}</span>
+                                    <span>{{CONSTANTS.CARD.TYPES.STRUCTURE.name}}</span>
                                 </div>
                             </div>
                             <div 
@@ -234,7 +234,7 @@
                                         @mouseover="hoveredCard = game.player1.utilitySlot"
                                         @mouseleave="hoveredCard = null"
                                     >
-                                    <span>{{CONSTANTS.CARD.TYPES.UTILITY}}</span>
+                                    <span>{{CONSTANTS.CARD.TYPES.UTILITY.name}}</span>
                                 </div>
                             </div>
                             <div 
@@ -251,7 +251,7 @@
                                         @mouseover="hoveredCard = game.player1.structureSlot2"
                                         @mouseleave="hoveredCard = null"
                                     >
-                                    <span>{{CONSTANTS.CARD.TYPES.STRUCTURE}}</span>
+                                    <span>{{CONSTANTS.CARD.TYPES.STRUCTURE.name}}</span>
                                 </div>
                             </div>
                             <div class="slot discard" :style="{width: CONSTANTS.CARD.SIZES.WIDTH + 'px', height: CONSTANTS.CARD.SIZES.HEIGHT + 'px'}">
@@ -331,7 +331,12 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
 <script type="module">
     import Game from './engine/Game.js';
-    import {DefaultUnity} from './classes/cards/Imports.js';
+    import {
+        Unity,
+        Utility,
+        Structure,
+        DefaultUnity
+    } from './classes/cards/Imports.js';
     import Deck from './classes/Deck.js';
     import Player from './classes/Player.js';
     import CONSTANTS, { GLOBALS } from './classes/Constants.js';
@@ -406,8 +411,8 @@
                     }
                 }
             },
-            PlaceCard: function(slot, type, player){
-                if(this.game.activePlayer == player && this.game.isPositionPhase() && this.selectedCard.type == type){
+            PlaceCard: function(slot, type, player){                
+                if(this.game.activePlayer == player && this.game.isPositionPhase() && this.selectedCard instanceof type){
                     this.game.activePlayer.PlaceCard(this.selectedCard, slot);
                     this.selectedCard = null;
                 }
@@ -416,38 +421,38 @@
         computed: {
             unityClassObjectPlayer1: function () {
                 return {
-                    'btn': this.game.activePlayer == this.game.player1 && this.game.isPositionPhase() && (this.selectedCard && this.selectedCard.type == CONSTANTS.CARD.TYPES.UNITY),
-                    'btn-slot': this.game.activePlayer == this.game.player1 && this.game.isPositionPhase() && (this.selectedCard && this.selectedCard.type == CONSTANTS.CARD.TYPES.UNITY),
+                    'btn': this.game.activePlayer == this.game.player1 && this.game.isPositionPhase() && (this.selectedCard && this.selectedCard instanceof Unity),
+                    'btn-slot': this.game.activePlayer == this.game.player1 && this.game.isPositionPhase() && (this.selectedCard && this.selectedCard instanceof Unity),
                 }
             },
             utilityClassObjectPlayer1: function () {
                 return {
-                    'btn': this.game.activePlayer == this.game.player1 && this.game.isPositionPhase() && (this.selectedCard && this.selectedCard.type == CONSTANTS.CARD.TYPES.UTILITY),
-                    'btn-slot': this.game.activePlayer == this.game.player1 && this.game.isPositionPhase() && (this.selectedCard && this.selectedCard.type == CONSTANTS.CARD.TYPES.UTILITY),
+                    'btn': this.game.activePlayer == this.game.player1 && this.game.isPositionPhase() && (this.selectedCard && this.selectedCard instanceof Utility),
+                    'btn-slot': this.game.activePlayer == this.game.player1 && this.game.isPositionPhase() && (this.selectedCard && this.selectedCard instanceof Utility),
                 }
             },
             structureClassObjectPlayer1: function () {
                 return {
-                    'btn': this.game.activePlayer == this.game.player1 && this.game.isPositionPhase() && (this.selectedCard && this.selectedCard.type == CONSTANTS.CARD.TYPES.STRUCTURE),
-                    'btn-slot': this.game.activePlayer == this.game.player1 && this.game.isPositionPhase() && (this.selectedCard && this.selectedCard.type == CONSTANTS.CARD.TYPES.STRUCTURE),
+                    'btn': this.game.activePlayer == this.game.player1 && this.game.isPositionPhase() && (this.selectedCard && this.selectedCard instanceof Structure),
+                    'btn-slot': this.game.activePlayer == this.game.player1 && this.game.isPositionPhase() && (this.selectedCard && this.selectedCard instanceof Structure),
                 }
             },
             unityClassObjectPlayer2: function () {
                 return {
-                    'btn': this.game.activePlayer == this.game.player2 && this.game.isPositionPhase() && (this.selectedCard && this.selectedCard.type == CONSTANTS.CARD.TYPES.UNITY),
-                    'btn-slot': this.game.activePlayer == this.game.player2 && this.game.isPositionPhase() && (this.selectedCard && this.selectedCard.type == CONSTANTS.CARD.TYPES.UNITY),
+                    'btn': this.game.activePlayer == this.game.player2 && this.game.isPositionPhase() && (this.selectedCard && this.selectedCard instanceof Unity),
+                    'btn-slot': this.game.activePlayer == this.game.player2 && this.game.isPositionPhase() && (this.selectedCard && this.selectedCard instanceof Unity),
                 }
             },
             utilityClassObjectPlayer2: function () {
                 return {
-                    'btn': this.game.activePlayer == this.game.player2 && this.game.isPositionPhase() && (this.selectedCard && this.selectedCard.type == CONSTANTS.CARD.TYPES.UTILITY),
-                    'btn-slot': this.game.activePlayer == this.game.player2 && this.game.isPositionPhase() && (this.selectedCard && this.selectedCard.type == CONSTANTS.CARD.TYPES.UTILITY),
+                    'btn': this.game.activePlayer == this.game.player2 && this.game.isPositionPhase() && (this.selectedCard && this.selectedCard instanceof Utility),
+                    'btn-slot': this.game.activePlayer == this.game.player2 && this.game.isPositionPhase() && (this.selectedCard && this.selectedCard instanceof Utility),
                 }
             },
             structureClassObjectPlayer2: function () {
                 return {
-                    'btn': this.game.activePlayer == this.game.player2 && this.game.isPositionPhase() && (this.selectedCard && this.selectedCard.type == CONSTANTS.CARD.TYPES.STRUCTURE),
-                    'btn-slot': this.game.activePlayer == this.game.player2 && this.game.isPositionPhase() && (this.selectedCard && this.selectedCard.type == CONSTANTS.CARD.TYPES.STRUCTURE),
+                    'btn': this.game.activePlayer == this.game.player2 && this.game.isPositionPhase() && (this.selectedCard && this.selectedCard instanceof Structure),
+                    'btn-slot': this.game.activePlayer == this.game.player2 && this.game.isPositionPhase() && (this.selectedCard && this.selectedCard instanceof Structure),
                 }
             }
         }

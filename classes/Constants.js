@@ -1,3 +1,7 @@
+import Structure from "./cards/structures/Structure.js";
+import Unity from "./cards/units/Unity.js";
+import Utility from "./cards/utilities/Utility.js";
+
 var CONSTANTS = {
     CARD: {
         SIZES: {
@@ -5,9 +9,9 @@ var CONSTANTS = {
             HEIGHT: 80,
         },
         TYPES: {
-            UNITY: "unity",
-            STRUCTURE: "structure",
-            UTILITY: "utility"
+            UNITY: Unity,
+            STRUCTURE: Structure,
+            UTILITY: Utility
         }
     },
     GAME: {
