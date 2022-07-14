@@ -32,11 +32,7 @@ var CONSTANTS = {
 
 var GLOBALS = {
     ASSETS: {
-        BACK: makeImageFromFilePath("../assets/back.png"),
-        HOOPA: makeImageFromFilePath("../assets/hoopa.png"),
-        INTELEON: makeImageFromFilePath("../assets/inteleon.png"),
-        MOLTRES: makeImageFromFilePath("../assets/moltres.png"),
-        URSHIFU: makeImageFromFilePath("../assets/urshifu.png"),
+        DEFAULT_UNITY: makeImageFromFilePath("../assets/cards/units/default_unity.png"),
     }
 }
 
