@@ -4,7 +4,8 @@ export default class Game {
     constructor(){
         this.player1 = null;
         this.player2 = null;
-        this.activePlayer = null
+        this.activePlayer = null;
+        this.selectedCard = null;
 
         this.round = 0;
         this.phase = null;
@@ -72,6 +73,8 @@ export default class Game {
     }
 
     ChangeTurn = function(){
+        this.activePlayer.resetSlotsAttackCount();
+
         if(this.activePlayer == this.player1){
             this.activePlayer = this.player2
         }else{
@@ -89,5 +92,27 @@ export default class Game {
 
     isPositionPhase = function(){
         return this.phase == CONSTANTS.GAME.PHASES.POSITION;
+    }
+
+    isAttackPhase = function(){
+        return this.phase == CONSTANTS.GAME.PHASES.ATTACK;
+    }
+
+    PrepareAttack = function(slot){
+        if(this.selectedCard != null){
+            if(this.activePlayer == this.player1){
+                if(this.selectedCard.CanAttack()){
+                    this.player2.DealDamageToCard(slot, this.selectedCard.currentATK);
+                    this.selectedCard.attackCount++;
+                }
+            }else{
+                if(this.selectedCard.CanAttack()){
+                    this.player1.DealDamageToCard(slot, this.selectedCard.currentATK);
+                    this.selectedCard.attackCount++;
+                }
+            }        
+        }
+
+        this.selectedCard = null;
     }
 }

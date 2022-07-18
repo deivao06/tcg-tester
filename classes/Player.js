@@ -1,3 +1,5 @@
+import CONSTANTS from "./Constants.js";
+
 export default class Player {
     constructor(name, deck){
         this.name = name;
@@ -46,5 +48,32 @@ export default class Player {
                 alert("Você não tem moedas suficientes!");
             }
         }
+    }
+
+    DealDamageToCard(slot, damage){
+        this[slot].TakeDamage(damage);
+
+        if(this[slot].Died()){
+            this.discard.push(this[slot]);
+            this[slot] = null;
+        }
+    }
+
+    IsSlotNotEmpty(slot){
+        return this[slot] != null;
+    }
+
+    GetSlotCard(slot){
+        return this[slot];
+    }
+
+    resetSlotsAttackCount(){
+        var slots = Object.values(CONSTANTS.GAME.SLOTS);
+        var player = this;
+        slots.forEach(function(slot){
+            if(player[slot] != null){
+                player[slot].ResetAttackCount();
+            }
+        })
     }
 }

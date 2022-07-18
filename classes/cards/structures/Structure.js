@@ -7,4 +7,12 @@ export default class Structure extends Card {
         this.baseHP = 0;
         this.currentHP = this.baseHP;
     }
+
+    TakeDamage(damage){
+        this.currentHP -= damage;
+    }
+
+    Died(){
+        return this.currentHP <= 0;
+    }
 }
