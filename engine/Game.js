@@ -1,11 +1,16 @@
 import CONSTANTS from '../classes/Constants.js';
+import {
+    Unity,
+    Utility,
+    Structure,
+    DefaultUnity
+} from '../classes/cards/Imports.js';
 
 export default class Game {
     constructor(){
         this.player1 = null;
         this.player2 = null;
         this.activePlayer = null;
-        this.selectedCard = null;
 
         this.round = 0;
         this.phase = null;
@@ -73,7 +78,7 @@ export default class Game {
     }
 
     ChangeTurn = function(){
-        this.activePlayer.resetSlotsAttackCount();
+        this.activePlayer.ResetSlotsAttackCount();
 
         if(this.activePlayer == this.player1){
             this.activePlayer = this.player2
@@ -86,10 +91,6 @@ export default class Game {
         this.StartPhase();
     }
 
-    isActivePlayerCard = function(card){
-        return this.activePlayer.hand.includes(card);
-    }    
-
     isPositionPhase = function(){
         return this.phase == CONSTANTS.GAME.PHASES.POSITION;
     }
@@ -99,20 +100,50 @@ export default class Game {
     }
 
     PrepareAttack = function(slot){
-        if(this.selectedCard != null){
+        if(this.activePlayer.selectedCard != null){
             if(this.activePlayer == this.player1){
-                if(this.selectedCard.CanAttack()){
-                    this.player2.DealDamageToCard(slot, this.selectedCard.currentATK);
-                    this.selectedCard.attackCount++;
+                if(this.activePlayer.selectedCard.CanAttack()){
+                    this.player2.DealDamageToCard(slot, this.activePlayer.selectedCard.currentATK);
+                    this.activePlayer.selectedCard.attackCount++;
                 }
             }else{
-                if(this.selectedCard.CanAttack()){
-                    this.player1.DealDamageToCard(slot, this.selectedCard.currentATK);
-                    this.selectedCard.attackCount++;
+                if(this.activePlayer.selectedCard.CanAttack()){
+                    this.player1.DealDamageToCard(slot, this.activePlayer.selectedCard.currentATK);
+                    this.activePlayer.selectedCard.attackCount++;
                 }
             }        
         }
 
-        this.selectedCard = null;
+        this.activePlayer.selectedCard = null;
+    }
+
+    PrepareCardSelection = function(card){
+        if(this.isPositionPhase()){
+            this.activePlayer.SelectCard(card);
+        }
+    }
+
+    PrepareCardAction = function(slot, type, player){
+        if(this.activePlayer == player){
+            if(this.isPositionPhase()){
+                if(this.activePlayer.selectedCard instanceof type){
+                    this.activePlayer.PlaceCard(this.activePlayer.selectedCard, slot);
+                    this.activePlayer.selectedCard = null;
+                }
+            }else if(this.isAttackPhase()){
+                if(this.activePlayer.IsSlotNotEmpty(slot)){
+                    var card = this.activePlayer.GetSlotCard(slot);
+                    if(card instanceof Unity && card.CanAttack()){
+                        this.activePlayer.selectedCard = card;
+                    }
+                }
+            }
+        }else{
+            if(this.isAttackPhase()){
+                if(player.IsSlotNotEmpty(slot)){
+                    this.PrepareAttack(slot);
+                }
+            }
+        }
     }
 }

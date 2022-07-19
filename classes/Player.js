@@ -7,6 +7,7 @@ export default class Player {
         this.deck = deck;
         this.discard = [];
         this.hand = [];
+        this.selectedCard = null;
 
         this.coins = 0;
 
@@ -50,6 +51,10 @@ export default class Player {
         }
     }
 
+    IsMyCard = function(card){
+        return this.hand.includes(card);
+    }    
+
     DealDamageToCard(slot, damage){
         this[slot].TakeDamage(damage);
 
@@ -67,7 +72,7 @@ export default class Player {
         return this[slot];
     }
 
-    resetSlotsAttackCount(){
+    ResetSlotsAttackCount(){
         var slots = Object.values(CONSTANTS.GAME.SLOTS);
         var player = this;
         slots.forEach(function(slot){
@@ -75,5 +80,11 @@ export default class Player {
                 player[slot].ResetAttackCount();
             }
         })
+    }
+
+    SelectCard(card){
+        if(this.IsMyCard(card)){
+            this.selectedCard = card;
+        }
     }
 }

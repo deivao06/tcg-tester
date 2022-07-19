@@ -17,7 +17,7 @@
                                 :src="card.asset.src"
                                 :width="CONSTANTS.CARD.SIZES.WIDTH" 
                                 :height="CONSTANTS.CARD.SIZES.HEIGHT"
-                                :class="{'selected-card': card == game.selectedCard}" 
+                                :class="{'selected-card': card == game.activePlayer.selectedCard}" 
                                 @click="SelectCard(card)"
                                 @mouseover="hoveredCard = card"
                                 @mouseleave="hoveredCard = null"
@@ -93,7 +93,7 @@
                                     <img 
                                         v-if="game.player2.unitySlot1" 
                                         :src="game.player2.unitySlot1.asset.src"
-                                        :class="{'selected-card': game.player2.unitySlot1 == game.selectedCard && game.isAttackPhase()}"
+                                        :class="{'selected-card': game.player2.unitySlot1 == game.activePlayer.selectedCard && game.isAttackPhase()}"
                                         width="100%" height="100%"
                                         @mouseover="hoveredCard = game.player2.unitySlot1"
                                         @mouseleave="hoveredCard = null"
@@ -111,7 +111,7 @@
                                     <img 
                                         v-if="game.player2.unitySlot2" 
                                         :src="game.player2.unitySlot2.asset.src" 
-                                        :class="{'selected-card': game.player2.unitySlot2 == game.selectedCard && game.isAttackPhase()}"
+                                        :class="{'selected-card': game.player2.unitySlot2 == game.activePlayer.selectedCard && game.isAttackPhase()}"
                                         width="100%" height="100%"
                                         @mouseover="hoveredCard = game.player2.unitySlot2"
                                         @mouseleave="hoveredCard = null"
@@ -129,7 +129,7 @@
                                     <img 
                                         v-if="game.player2.unitySlot3" 
                                         :src="game.player2.unitySlot3.asset.src" 
-                                        :class="{'selected-card': game.player2.unitySlot3 == game.selectedCard && game.isAttackPhase()}"
+                                        :class="{'selected-card': game.player2.unitySlot3 == game.activePlayer.selectedCard && game.isAttackPhase()}"
                                         width="100%" height="100%"
                                         @mouseover="hoveredCard = game.player2.unitySlot3"
                                         @mouseleave="hoveredCard = null"
@@ -157,7 +157,7 @@
                                     <img 
                                         v-if="game.player1.unitySlot1" 
                                         :src="game.player1.unitySlot1.asset.src"
-                                        :class="{'selected-card': game.player1.unitySlot1 == game.selectedCard && game.isAttackPhase()}"  
+                                        :class="{'selected-card': game.player1.unitySlot1 == game.activePlayer.selectedCard && game.isAttackPhase()}"  
                                         width="100%" height="100%"
                                         @mouseover="hoveredCard = game.player1.unitySlot1"
                                         @mouseleave="hoveredCard = null"
@@ -175,7 +175,7 @@
                                     <img 
                                         v-if="game.player1.unitySlot2" 
                                         :src="game.player1.unitySlot2.asset.src"
-                                        :class="{'selected-card': game.player1.unitySlot2 == game.selectedCard && game.isAttackPhase()}"
+                                        :class="{'selected-card': game.player1.unitySlot2 == game.activePlayer.selectedCard && game.isAttackPhase()}"
                                         width="100%" height="100%"
                                         @mouseover="hoveredCard = game.player1.unitySlot2"
                                         @mouseleave="hoveredCard = null"
@@ -193,7 +193,7 @@
                                     <img 
                                         v-if="game.player1.unitySlot3" 
                                         :src="game.player1.unitySlot3.asset.src"
-                                        :class="{'selected-card': game.player1.unitySlot3 == game.selectedCard && game.isAttackPhase()}"
+                                        :class="{'selected-card': game.player1.unitySlot3 == game.activePlayer.selectedCard && game.isAttackPhase()}"
                                         width="100%" height="100%"
                                         @mouseover="hoveredCard = game.player1.unitySlot3"
                                         @mouseleave="hoveredCard = null"
@@ -273,7 +273,7 @@
                                 :src="card.asset.src" 
                                 :width="CONSTANTS.CARD.SIZES.WIDTH" 
                                 :height="CONSTANTS.CARD.SIZES.HEIGHT"
-                                :class="{'selected-card': card == game.selectedCard}" 
+                                :class="{'selected-card': card == game.activePlayer.selectedCard}" 
                                 @click="SelectCard(card)"
                                 @mouseover="hoveredCard = card"
                                 @mouseleave="hoveredCard = null"
@@ -281,7 +281,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="nav-bar" @click="game.selectedCard = null">
+                <div class="nav-bar" @click="game.activePlayer.selectedCard = null">
                     <div class="phase-manager">
                         <button class="btn" :disabled="game.activePlayer != game.player2 || game.phase != CONSTANTS.GAME.PHASES.START" @click="DrawPhase">Draw</button>
                         <button class="btn" :disabled="game.activePlayer != game.player2 || game.phase != CONSTANTS.GAME.PHASES.DRAW" @click="PositionPhase">Position</button>
@@ -442,69 +442,43 @@
                 this.game.EndPhase();
             },            
             SelectCard: function(card){
-                if(this.game.isPositionPhase()){
-                    if(this.game.isActivePlayerCard(card)){
-                        this.game.selectedCard = card;
-                    }else{
-                        //TODO
-                    }
-                }
+                this.game.PrepareCardSelection(card);
             },
-            CardAction: function(slot, type, player){                
-                if(this.game.activePlayer == player){
-                    if(this.game.isPositionPhase()){
-                        if(this.game.selectedCard instanceof type){
-                            this.game.activePlayer.PlaceCard(this.game.selectedCard, slot);
-                            this.game.selectedCard = null;
-                        }
-                    }else if(this.game.isAttackPhase()){
-                        if(this.game.activePlayer.IsSlotNotEmpty(slot)){
-                            var card = this.game.activePlayer.GetSlotCard(slot);
-                            if(card instanceof Unity && card.CanAttack()){
-                                this.game.selectedCard = card;
-                            }
-                        }
-                    }
-                }else{
-                    if(this.game.isAttackPhase()){
-                        if(player.IsSlotNotEmpty(slot)){
-                            this.game.PrepareAttack(slot);
-                        }
-                    }
-                }
+            CardAction: function(slot, type, player){     
+                this.game.PrepareCardAction(slot, type, player);
             }
         },
         computed: {
             unityClassObjectPlayer1: function () {
                 return {
-                    'btn btn-slot': (this.game.activePlayer == this.game.player1 && this.game.isPositionPhase() && (this.game.selectedCard && this.game.selectedCard instanceof Unity))
-                                    || (this.game.isAttackPhase() && this.game.activePlayer == this.game.player2 && this.game.selectedCard != null),
+                    'btn btn-slot': (this.game.activePlayer == this.game.player1 && this.game.isPositionPhase() && (this.game.activePlayer.selectedCard && this.game.activePlayer.selectedCard instanceof Unity))
+                                    || (this.game.isAttackPhase() && this.game.activePlayer == this.game.player2 && this.game.activePlayer.selectedCard != null),
                 }
             },
             utilityClassObjectPlayer1: function () {
                 return {
-                    'btn btn-slot': this.game.activePlayer == this.game.player1 && this.game.isPositionPhase() && (this.game.selectedCard && this.game.selectedCard instanceof Utility),
+                    'btn btn-slot': this.game.activePlayer == this.game.player1 && this.game.isPositionPhase() && (this.game.activePlayer.selectedCard && this.game.activePlayer.selectedCard instanceof Utility),
                 }
             },
             structureClassObjectPlayer1: function () {
                 return {
-                    'btn btn-slot': this.game.activePlayer == this.game.player1 && this.game.isPositionPhase() && (this.game.selectedCard && this.game.selectedCard instanceof Structure),
+                    'btn btn-slot': this.game.activePlayer == this.game.player1 && this.game.isPositionPhase() && (this.game.activePlayer.selectedCard && this.game.activePlayer.selectedCard instanceof Structure),
                 }
             },
             unityClassObjectPlayer2: function () {
                 return {
-                    'btn btn-slot': (this.game.activePlayer == this.game.player2 && this.game.isPositionPhase() && (this.game.selectedCard && this.game.selectedCard instanceof Unity)) 
-                                    || (this.game.isAttackPhase() && this.game.activePlayer == this.game.player1 && this.game.selectedCard != null),
+                    'btn btn-slot': (this.game.activePlayer == this.game.player2 && this.game.isPositionPhase() && (this.game.activePlayer.selectedCard && this.game.activePlayer.selectedCard instanceof Unity)) 
+                                    || (this.game.isAttackPhase() && this.game.activePlayer == this.game.player1 && this.game.activePlayer.selectedCard != null),
                 }
             },
             utilityClassObjectPlayer2: function () {
                 return {
-                    'btn btn-slot': this.game.activePlayer == this.game.player2 && this.game.isPositionPhase() && (this.game.selectedCard && this.game.selectedCard instanceof Utility),
+                    'btn btn-slot': this.game.activePlayer == this.game.player2 && this.game.isPositionPhase() && (this.game.activePlayer.selectedCard && this.game.activePlayer.selectedCard instanceof Utility),
                 }
             },
             structureClassObjectPlayer2: function () {
                 return {
-                    'btn btn-slot': this.game.activePlayer == this.game.player2 && this.game.isPositionPhase() && (this.game.selectedCard && this.game.selectedCard instanceof Structure),
+                    'btn btn-slot': this.game.activePlayer == this.game.player2 && this.game.isPositionPhase() && (this.game.activePlayer.selectedCard && this.game.activePlayer.selectedCard instanceof Structure),
                 }
             }
         }
