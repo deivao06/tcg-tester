@@ -45,6 +45,8 @@ export default class Player {
                 if(this.coins < 0){
                     this.coins = 0;
                 }
+
+                this.selectedCard = null;
             }else{
                 alert("Você não tem moedas suficientes!");
             }
