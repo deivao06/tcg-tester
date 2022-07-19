@@ -31,20 +31,22 @@ export default class Player {
         }
     }
 
-    PlaceCard(card, slot){
+    PlaceCard(slot){
         if(this[slot] == null){
-            if(this.coins >= card.currentCost){
-                this[slot] = card;
+            if(this.coins >= this.selectedCard.currentCost){
+                this[slot] = this.selectedCard;
     
-                var cardIndex = this.hand.indexOf(card);            
+                var cardIndex = this.hand.indexOf(this.selectedCard);            
                 if(cardIndex > -1){
                     this.hand.splice(cardIndex, 1);
                 }
 
-                this.coins -= card.currentCost;
+                this.coins -= this.selectedCard.currentCost;
                 if(this.coins < 0){
                     this.coins = 0;
                 }
+
+                console.log(`Placed ${this.selectedCard.name} in ${slot} | ${this.name}`);
 
                 this.selectedCard = null;
             }else{

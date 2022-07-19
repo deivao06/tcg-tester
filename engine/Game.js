@@ -127,7 +127,7 @@ export default class Game {
         if(this.activePlayer == player){
             if(this.isPositionPhase()){
                 if(this.activePlayer.selectedCard instanceof type){
-                    this.activePlayer.PlaceCard(this.activePlayer.selectedCard, slot);
+                    this.activePlayer.PlaceCard(slot);
                 }
             }else if(this.isAttackPhase()){
                 if(this.activePlayer.IsSlotNotEmpty(slot)){
