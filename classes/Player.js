@@ -63,6 +63,9 @@ export default class Player {
         this[slot].TakeDamage(damage);
 
         if(this[slot].Died()){
+            
+            console.log(`${this[slot].name} died`)
+
             this.discard.push(this[slot]);
             this[slot] = null;
         }

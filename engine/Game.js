@@ -105,11 +105,19 @@ export default class Game {
                 if(this.activePlayer.selectedCard.CanAttack()){
                     this.player2.DealDamageToCard(slot, this.activePlayer.selectedCard.currentATK);
                     this.activePlayer.selectedCard.attackCount++;
+
+                    if(this.player2[slot] != null){
+                        console.log(`${this.activePlayer.selectedCard.name} did ${this.activePlayer.selectedCard.currentATK} damage to ${this.player2[slot].name} | ${this.activePlayer.name}`);
+                    }
                 }
             }else{
                 if(this.activePlayer.selectedCard.CanAttack()){
                     this.player1.DealDamageToCard(slot, this.activePlayer.selectedCard.currentATK);
                     this.activePlayer.selectedCard.attackCount++;
+
+                    if(this.player1[slot] != null){
+                        console.log(`${this.activePlayer.selectedCard.name} did ${this.activePlayer.selectedCard.currentATK} damage to ${this.player1[slot].name} | ${this.activePlayer.name}`);
+                    }
                 }
             }        
         }
