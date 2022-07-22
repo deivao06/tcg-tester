@@ -10,6 +10,7 @@ export default class Player {
         this.selectedCard = null;
 
         this.coins = 0;
+        this.turn = 0;
 
         this.structureSlot1 = null;
         this.structureSlot2 = null;
@@ -63,7 +64,7 @@ export default class Player {
         this[slot].TakeDamage(damage);
 
         if(this[slot].Died()){
-            
+
             console.log(`${this[slot].name} died`)
 
             this.discard.push(this[slot]);

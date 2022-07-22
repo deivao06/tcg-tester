@@ -28,11 +28,9 @@ export default class Game {
         this.player1.DrawCards(5);
         this.player2.DrawCards(5);
 
-        console.log("%cGiving 1 coin for each player!", "color: red;")
-        this.player1.coins++;
-        this.player2.coins++;
-
         this.activePlayer = this.player1;
+        this.activePlayer.turn++;
+
         console.log(`%c${this.activePlayer.name} Turn!`, "color:green; font-size: 16px; font-weight: bold");
 
         this.StartPhase();
@@ -46,10 +44,8 @@ export default class Game {
             this.round ++;
         }
 
-        if(this.round != 1){
-            console.log(`%cGiving 1 coin! | ${this.activePlayer.name}`, "color: red;");
-            this.activePlayer.coins++;
-        }
+        console.log(`%cGiving ${this.round} coin! | ${this.activePlayer.name}`, "color: red;");
+        this.activePlayer.coins += this.round;
     }
 
     DrawPhase = function(){
@@ -85,6 +81,8 @@ export default class Game {
         }else{
             this.activePlayer = this.player1
         }
+
+        this.activePlayer.turn++;
         
         console.log(`%c${this.activePlayer.name} Turn!`, "color:green; font-size: 16px; font-weight: bold");
 
