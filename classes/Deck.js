@@ -20,7 +20,7 @@ export default class Deck {
                 if(card instanceof type){
                     var cardIndex = cards.indexOf(card);            
                     if(cardIndex > -1){
-                        drawedCards.unshift(cards.splice(cardIndex, 1)[0]);
+                        drawedCards.push(cards.splice(cardIndex, 1)[0]);
                     }
                 }
             });

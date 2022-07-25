@@ -100,8 +100,6 @@ export default class Player {
         var structures = this.deck.GetStructures();
         var self = this;
 
-        console.log(structures);
-
         structures.forEach(function(structure){
             if(self.structureSlot1 == null){
                 self.structureSlot1 = structure;
