@@ -37,6 +37,7 @@ var CONSTANTS = {
 var GLOBALS = {
     ASSETS: {
         DEFAULT_UNITY: makeImageFromFilePath("../assets/cards/units/default_unity.png"),
+        DEFAULT_STRUCTURE: makeImageFromFilePath("../assets/cards/structures/default_structure.png"),
     }
 }
 

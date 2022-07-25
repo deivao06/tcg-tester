@@ -33,7 +33,7 @@
                                 <div class="info">
                                     <img 
                                         v-if="game.player2.structureSlot1" 
-                                        :src="game.player2.structureSlot1.src" 
+                                        :src="game.player2.structureSlot1.asset.src" 
                                         width="100%" height="100%"
                                         @mouseover="hoveredCard = game.player2.structureSlot1"
                                         @mouseleave="hoveredCard = null"
@@ -351,7 +351,8 @@
         Unity,
         Utility,
         Structure,
-        DefaultUnity
+        DefaultUnity,
+        DefaultStructure,
     } from './classes/cards/Imports.js';
     import Deck from './classes/Deck.js';
     import Player from './classes/Player.js';
@@ -393,8 +394,8 @@
                     new DefaultUnity(),
                     new DefaultUnity(),
                     new DefaultUnity(),
-                    new DefaultUnity(),
-                    new DefaultUnity(),
+                    new DefaultStructure(),
+                    new DefaultStructure(),
                 ];
                 var cardsPlayer2 = [
                     new DefaultUnity(),
@@ -415,8 +416,8 @@
                     new DefaultUnity(),
                     new DefaultUnity(),
                     new DefaultUnity(),
-                    new DefaultUnity(),
-                    new DefaultUnity(),
+                    new DefaultStructure(),
+                    new DefaultStructure(),
                 ];
 
                 var deck1 = new Deck("Deck Teste", cardsPlayer1, this.GLOBALS.ASSETS.DEFAULT_UNITY);

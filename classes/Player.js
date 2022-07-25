@@ -23,7 +23,7 @@ export default class Player {
     DrawCards(quantity = 1) {
         if(this.deck.cards.length >= quantity){
             var name = this.name;
-            var drawedCards = this.deck.Draw(quantity);
+            var drawedCards = this.deck.Draw({quantity: quantity});
             this.hand = this.hand.concat(drawedCards);
 
             drawedCards.forEach(function(card){
@@ -94,5 +94,20 @@ export default class Player {
         if(this.IsMyCard(card)){
             this.selectedCard = card;
         }
+    }
+
+    PlaceStructures(){
+        var structures = this.deck.GetStructures();
+        var self = this;
+
+        console.log(structures);
+
+        structures.forEach(function(structure){
+            if(self.structureSlot1 == null){
+                self.structureSlot1 = structure;
+            }else if(self.structureSlot1 != null && self.structureSlot2 == null){
+                self.structureSlot2 = structure;
+            }
+        })
     }
 }

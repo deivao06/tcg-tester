@@ -1,10 +1,10 @@
 import Card from "../Card.js";
 
 export default class Structure extends Card {
-    constructor(){
-        super();
+    constructor({baseCost = 0, baseHP = 0}){
+        super({baseCost: baseCost});
 
-        this.baseHP = 0;
+        this.baseHP = baseHP;
         this.currentHP = this.baseHP;
     }
 

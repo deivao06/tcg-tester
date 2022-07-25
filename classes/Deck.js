@@ -1,3 +1,5 @@
+import Structure from "./cards/structures/Structure.js";
+
 export default class Deck {
     constructor(name, cards = [], asset){
         this.name = name;
@@ -5,11 +7,25 @@ export default class Deck {
         this.back = asset;
     }
 
-    Draw(quantity) {
+    Draw({quantity = 0, type = null}) {
         var drawedCards = [];
-        for(var i = 0; i < quantity; i++){
-            drawedCards.unshift(this.cards.shift());
+        var cards = this.cards;
+
+        if(type == null){
+            for(var i = 0; i < quantity; i++){
+                drawedCards.unshift(this.cards.shift());
+            }
+        }else{
+            cards.forEach(function(card){
+                if(card instanceof type){
+                    var cardIndex = cards.indexOf(card);            
+                    if(cardIndex > -1){
+                        drawedCards.unshift(cards.splice(cardIndex, 1)[0]);
+                    }
+                }
+            });
         }
+
         return drawedCards;
     }
 
@@ -27,5 +43,9 @@ export default class Deck {
             [this.cards[currentIndex], this.cards[randomIndex]] = [
             this.cards[randomIndex], this.cards[currentIndex]];
         }
+    }
+
+    GetStructures(){
+        return this.Draw({type: Structure})
     }
 }

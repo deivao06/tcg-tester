@@ -20,11 +20,15 @@ export default class Game {
         console.log("%cGame Started!", "color:green; font-size: 16px; font-weight: bold");
         this.phase = CONSTANTS.GAME.PHASES.START_GAME;
 
+        console.log("%cPlacing structures of each player!", "color: red;");
+        this.player1.PlaceStructures();
+        this.player2.PlaceStructures();
+        
         console.log("%cShuffling both decks!", "color: red;");
         this.player1.deck.Shuffle();
         this.player2.deck.Shuffle();
 
-        console.log("%cDrawing 5 cards for each player!", "color: red;")
+        console.log("%cDrawing 5 cards for each player!", "color: red;");
         this.player1.DrawCards(5);
         this.player2.DrawCards(5);
 
@@ -45,7 +49,7 @@ export default class Game {
         }
 
         console.log(`%cGiving ${this.round} coin! | ${this.activePlayer.name}`, "color: red;");
-        this.activePlayer.coins += this.round;
+        this.activePlayer.coins += this.round <= 5 ? this.round : 5;
     }
 
     DrawPhase = function(){
