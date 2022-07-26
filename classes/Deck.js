@@ -16,16 +16,25 @@ export default class Deck {
                 drawedCards.unshift(this.cards.shift());
             }
         }else{
+            var cardsIndex = [];
+
             cards.forEach(function(card){
                 if(card instanceof type){
                     var cardIndex = cards.indexOf(card);            
                     if(cardIndex > -1){
-                        drawedCards.push(cards.splice(cardIndex, 1)[0]);
+                        cardsIndex.push(cardIndex);
                     }
                 }
             });
+
+            if(cardsIndex.length > 0){
+                for (var i = cardsIndex.length -1; i >= 0; i--){
+                    drawedCards.push(cards.splice(cardsIndex[i],1)[0]);
+                }
+            }
         }
 
+        debugger;
         return drawedCards;
     }
 
